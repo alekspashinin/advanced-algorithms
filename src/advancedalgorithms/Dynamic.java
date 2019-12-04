@@ -1,7 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ *                    Jean Monnet University
+ * 
+ *         Rediet Gebretsion Tadesse * Dhayananth Dharmalingam
+ *         Poulomy Nandy * Aninda Maulik * Aleksei Pashinin
+ *
+ *                   Advanced Algorithms Project
+ *
  */
 package advancedalgorithms;
 
@@ -9,162 +14,110 @@ import java.util.ArrayList;
 
 
 
-// A Dynamic programming solution for 
-// Word Wrap Problem in Java 
+/* Dynamic Programming Solution */
 public class Dynamic{ 
   
-    final int MAX = Integer.MAX_VALUE;
-    final static int M = 6;
-    static String[] line;
-    static int[] track;
-    static int[] wordLenth;
+    /* Declaration of variables */
     static ArrayList<String> words= new ArrayList<>();
+    final int MAX = Integer.MAX_VALUE;
+    final static int LineSize = 6;
+    static int sizeL;
+    static String[] line;
+    static int[] wordLenth;
     
-    static void printResult(){
-    int numLine = 1;
-    for (int i = 1; i< track.length; i++){
-      if (track[i]==numLine){
-          advancedalgorithms.MainJFrame.jLabel3.setText(words.get(i-1)+" ");
-          advancedalgorithms.MainJFrame.jLabel3.repaint();
-          }
-          else{
-               advancedalgorithms.MainJFrame.jLabel3.repaint();
-               System.out.println();
-               numLine++;
-               i--;
-              }
-        }    
-    }
-      
-    // A utility function to print the solution 
-    int printSolution (int p[], int n){ 
-        int k; 
+    
+    
+    int doResult (int p[], int n){ 
+        int i,k; 
         if (p[n] == 1) 
         k = 1; 
         else
-        k = printSolution (p, p[n]-1) + 1; 
-        System.out.println("Line number" + " " + k + ": " +  
-                    "From word no." +" "+ p[n] + " " + "to" + " " + n); 
+        k = doResult (p, p[n]-1) + 1; 
+        for (i=p[n]; i<=n; i++){
+            if(wordLenth[i]==0){
+            }
+            else{
+                advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + words.get(i-1)+" ");
+                System.out.print(words.get(i-1)+" ");
+            }
+        }
+        advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + "\n");
+        System.out.println();
         return k; 
     }
     
-    static void findWordLengths() {
-		int index = 1;
-		for (String s : line) {
-                        words.add(s);
-			wordLenth[index] = s.length();
-			index++;
+    
+    /* Calculation the lengths of words */
+    static void wordLengths() {
+		int i =1;
+		for (String word : line) {
+                        words.add(word);
+			wordLenth[i] = word.length();
+			i++;
 		}
 	}
   
-// l[] represents lengths of different words in input sequence.  
-// For example, l[] = {3, 2, 2, 5} is for a sentence like  
-// "aaa bb cc ddddd". n is size of l[] and M is line width  
-// (maximum no. of characters that can fit in a line)  
-    void solveWordWrap (int l[], int n, int M){ 
-        // For simplicity, 1 extra space is used in all below arrays 
-      
-        // extras[i][j] will have number of extra spaces if words from i 
-        // to j are put in a single line 
-        int extras[][] = new int[n+1][n+1]; 
-      
-        // lc[i][j] will have cost of a line which has words from 
-        // i to j 
-        int lc[][]= new int[n+1][n+1]; 
-      
-        // c[i] will have total cost of optimal arrangement of words 
-        // from 1 to i 
-        int c[] = new int[n+1]; 
-      
-        // p[] is used to print the solution. 
-        int p[] =new int[n+1]; 
-      
-        // calculate extra spaces in a single line. The value extra[i][j] 
-        // indicates extra spaces if words from word number i to j are 
-        // placed in a single line 
-        for (int i = 1; i <= n; i++) 
-        { 
-            extras[i][i] = M - l[i-1]; 
-            for (int j = i+1; j <= n; j++) 
-            extras[i][j] = extras[i][j-1] - l[j-1] - 1; 
+    /* Generak function */
+    void DynamicSolution (int l[], int sizeL, int LineSize){ 
+        
+        /* Declaration of variables */
+        int totalSpaces[][] = new int[sizeL+1][sizeL+1]; 
+        int lc[][]= new int[sizeL+1][sizeL+1]; 
+        int totalCost[] = new int[sizeL+1];
+        totalCost[0] = 0; 
+        int p[] =new int[sizeL+1]; 
+        
+        /* Calculation */
+        for (int i = 1; i <= sizeL; i++){ 
+            totalSpaces[i][i] = LineSize - l[i-1]; 
+            for (int j = i+1; j <= sizeL; j++) 
+            totalSpaces[i][j] = totalSpaces[i][j-1] - l[j-1] - 1; 
         } 
           
-        // Calculate line cost corresponding to the above calculated extra 
-        // spaces. The value lc[i][j] indicates cost of putting words from 
-        // word number i to j in a single line 
-        for (int i = 1; i <= n; i++) 
-        { 
-            for (int j = i; j <= n; j++) 
-            { 
-                if (extras[i][j] < 0) 
+        for (int i = 1; i <= sizeL; i++){ 
+            for (int j = i; j <= sizeL; j++){ 
+                if (totalSpaces[i][j] < 0) 
                     lc[i][j] = MAX; 
-                else if (j == n && extras[i][j] >= 0) 
+                else if (j == sizeL && totalSpaces[i][j] >= 0) 
                     lc[i][j] = 0; 
                 else
-                    lc[i][j] = extras[i][j]*extras[i][j]; 
+                    lc[i][j] = totalSpaces[i][j]^2; 
             } 
         } 
           
-        // Calculate minimum cost and find minimum cost arrangement. 
-        // The value c[j] indicates optimized cost to arrange words 
-        // from word number 1 to j. 
-        c[0] = 0; 
-        for (int j = 1; j <= n; j++) 
-        { 
-            c[j] = MAX; 
-            for (int i = 1; i <= j; i++) 
-            { 
-                if (c[i-1] != MAX && lc[i][j] != MAX &&  
-                   (c[i-1] + lc[i][j] < c[j])) 
-                { 
-                    c[j] = c[i-1] + lc[i][j]; 
+        for (int j = 1; j <= sizeL; j++) { 
+            totalCost[j] = MAX; 
+            for (int i = 1; i <= j; i++) { 
+                if (totalCost[i-1] != MAX && lc[i][j] != MAX &&  
+                   (totalCost[i-1] + lc[i][j] < totalCost[j])) { 
+                    totalCost[j] = totalCost[i-1] + lc[i][j]; 
                     p[j] = i; 
                 } 
             } 
-        } 
-      
-        printSolution(p, n); 
+        }
+        advancedalgorithms.TextEditor.editor.setText("");
+        doResult(p, sizeL);
     }
     
-    static void tempPrint(int[] w){
-        int i;
-        for (i = 0; i < w.length; i++){
-            System.out.print(w[i]+" ");
-            }
-        System.out.println();
-    }
     
-    static void tempPrint2(String[] w){
-        int i;
-        for (i = 0; i < w.length; i++){
-            System.out.print(w[i]+" ");
-            }
-        System.out.println();
-    }
-    
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         //String temp = advancedalgorithms.MainJFrame.jLabel3.getText();
-        String temp = "asmkm kamsdm kasdmk ad asa asda kmdsm";
+        String temp = "This is the text just to test my algo and i will see the result";
         line = temp.split(" ");
-        track = new int[line.length + 1];
-        wordLenth = new int[line.length + 1];
-        tempPrint2(line);
-        //int l[] = {3, 2, 2, 5};
+        wordLenth = new int[line.length+1];
         Dynamic approach = new Dynamic();
-        findWordLengths();
-        int n = wordLenth.length;
-        tempPrint(wordLenth);
+        wordLengths();
+        int n = wordLenth.length-1;
+        System.out.println("n="+n);
         approach.solveWordWrap (wordLenth, n, M);
-        printResult();
-    }
-  
-    /*public Dynamic(){
-        String temp = advancedalgorithms.MainJFrame.jLabel3.getText();
-        line = temp.split(" "); 
-        int l[] = {3, 2, 2, 5}; 
-        int n = l.length;  
-        solveWordWrap (l, n, M);
-        printResult();
     }*/
-} 
   
+    public Dynamic(){
+        String temp = advancedalgorithms.TextEditor.editor.getText();
+        System.out.println(temp);
+        line = temp.split(" ");
+        wordLenth = new int[line.length+1];
+        wordLengths();
+        sizeL = wordLenth.length-1;
+    }
+} 
