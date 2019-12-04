@@ -5,6 +5,7 @@
  */
 package advancedalgorithms;
 
+import greedy.GreedyOps;
 import java.util.ArrayList;
 
 
@@ -109,13 +110,24 @@ public class test {
 	
 
 	public static void main(String[] args) {
-		findWordLengths();
-		createCostTable();
-		JustifyText();
-                printText2();
-		for (int i = 1; i < track.length; i++) {
-			System.out.println(track[i]);
-		}
+//		findWordLengths();
+//		createCostTable();
+//		JustifyText();
+//                printText2();
+//		for (int i = 1; i < track.length; i++) {
+//			System.out.println(track[i]);
+//		}
+            ArrayList<String> str=new ArrayList<String>();
+            str.add("judi");
+            str.add("messi");
+            str.add("lob");
+            
+            str.add("gurnici");
+            str.add("maniam");
+            str.add("connet");
+            GreedyOps go=new GreedyOps(str);
+            System.out.println("RUnning");
+            go.callGreedy();
 
 	}
 
