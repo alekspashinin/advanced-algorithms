@@ -5,118 +5,79 @@
  */
 package advancedalgorithms;
 
-import java.util.ArrayList;
-
-
-
 public class test {
 
-	static int M = 6;
-	static String[] line = "aaa bb cc ddd dd".split(" "); 
-	static int[] wordLenArr = new int[line.length + 1];
-	static int[][] cost = new int[line.length + 1][line.length + 1];
-	static int[] DP = new int[line.length + 1];
-	static int[] track = new int[line.length + 1];
-        static ArrayList<String> words= new ArrayList<>();
-
-	static void createCostTable() {
-		for (int i = 1; i < cost.length; i++) {
-			for (int j = i; j < cost.length; j++) {
-				int val = M - calcSubstringLength(i, j);
-                                 System.out.println(val+"="+M+" - "+calcSubstringLength(i, j));
-				if (val >= 0) {
-					cost[i][j] = val * val * val;
-
-				} else {
-					cost[i][j] = Integer.MAX_VALUE;
-				}
-			}
-		}
-	}
-
-	static int calcSubstringLength(int i, int j) {
-		int len = 0;
-		for (int k = i; k <= j; k++) {
-			len += wordLenArr[k];
-		}
-		return len;
-	}
-
-	static void findWordLengths() {
-		int index = 1;
-		for (String s : line) {
-                        words.add(s);
-			wordLenArr[index] = s.length();
-			index++;
-		}
-	}
-
-	static void JustifyText() {
-		DP[0] = 0;
-		for (int i = 1; i< DP.length; i++) {
-			DP[i] = Integer.MAX_VALUE;
-			for (int j = 1; j <=i; j++) {
-				if (DP[j - 1] + cost[j][i] < DP[i]) {
-					DP[i] = DP[j - 1] + cost[j][i];
-					track[i] = j;
-				}
-			}
-		}
-
-	}
+    public String justify(String words[], int width/*LineSize*/) {
         
-        static void printText(){
-            System.out.print("wordLenArr= ");
-            for (int i = 1; i< wordLenArr.length; i++) {
-                        System.out.print(wordLenArr[i]+" ");
+        int cost[][] = new int[words.length][words.length];
+        
+        //next 2 for loop is used to calculate cost of putting words from
+        //i to j in one line. If words don't fit in one line then we put
+        //Integer.MAX_VALUE there.
+        for(int i=0 ; i < words.length; i++){
+            cost[i][i] = width - words[i].length();
+            for(int j=i+1; j < words.length; j++){
+                cost[i][j] = cost[i][j-1] - words[j].length() - 1; 
             }
-            System.out.println();
-            System.out.print("DP= ");
-            for (int i = 1; i< DP.length; i++) {
-                        System.out.print(DP[i]+" ");
-            }
-            System.out.println();
-            System.out.println("COST TABLE= ");
-            for (int i = 1; i < cost.length; i++) {
-			for (int j = i; j < cost.length; j++) {
-                            System.out.print(cost[i][j]+" ");
-                        }
-                        System.out.println();
-            }
-            //for (int i = 0; i< DP.length; i++) {
-	//		System.out.print("DP= ");
-         //               System.out.print(DP[i]+" ");
-          //  }
-                    
         }
         
-        static void printText2(){
-            int numLine = 1;
-            for (int i = 1; i< track.length; i++) {
-                if (track[i]==numLine){
-			System.out.print(words.get(i-1)+" ");
+        for(int i=0; i < words.length; i++){
+            for(int j=i; j < words.length; j++){
+                if(cost[i][j] < 0){
+                    cost[i][j] = Integer.MAX_VALUE;
+                }else{
+                    cost[i][j] = (int)Math.pow(cost[i][j], 2);
                 }
-                else{
-                    System.out.println();
-                    numLine++;
-                    i--;
-                }
-                }
-                
             }
+        }
         
-	
-	
-
-	public static void main(String[] args) {
-		findWordLengths();
-		createCostTable();
-		JustifyText();
-                printText2();
-		for (int i = 1; i < track.length; i++) {
-			System.out.println(track[i]);
-		}
-
-	}
-
+        //minCost from i to len is found by trying
+        //j between i to len and checking which
+        //one has min value
+        int minCost[] = new int[words.length]; //TotalCost
+        int result[] = new int[words.length];
+        for(int i = words.length-1; i >= 0 ; i--){
+            minCost[i] = cost[i][words.length-1];
+            result[i] = words.length;
+            for(int j=words.length-1; j > i; j--){
+                if(cost[i][j-1] == Integer.MAX_VALUE){
+                    continue;
+                }
+                if(minCost[i] > minCost[j] + cost[i][j-1]){
+                    minCost[i] = minCost[j] + cost[i][j-1];
+                    result[i] = j;
+                }
+            }
+        }
+        System.out.println("sizeL="+words.length);
+        System.out.println("LineSize="+width);
+        for (int i = 0; i < words.length; i++){
+        System.out.println("result["+i+"]="+result[i]);
+        }
+        
+        int i = 0;
+        int j;
+        
+        System.out.println("Minimum cost is " + minCost[0]);
+        System.out.println("\n");
+        //finally put all words with new line added in 
+        //string buffer and print it.
+        StringBuilder builder = new StringBuilder();
+        do{
+            j = result[i];
+            for(int k=i; k < j; k++){
+                builder.append(words[k] + " ");
+            }
+            builder.append("\n");
+            i = j;
+        }while(j < words.length);
+        
+        return builder.toString();
+    }
+    
+    public static void main(String args[]){
+        String words1[] = {"This","is","the","text","just","to", "test"};
+        test awl = new test();
+        System.out.println(awl.justify(words1, 12));
+    }
 }

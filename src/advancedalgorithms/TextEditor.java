@@ -1,13 +1,8 @@
 package advancedalgorithms;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyledEditorKit;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 

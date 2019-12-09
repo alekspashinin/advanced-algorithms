@@ -1,20 +1,25 @@
 /**
  *
- *            Jean Monnet University
+ *                    Jean Monnet University
  * 
- *         Dimitrios Soupilas * Riad Lazli
- *         Erwan Le Cornec * Aleksei Pashinin
+ *         Rediet Gebretsion Tadesse * Dhayananth Dharmalingam
+ *         Poulomy Nandy * Aninda Maulik * Aleksei Pashinin
  *
- *           Advanced Algorithms Project
+ *                   Advanced Algorithms Project
  *
  */
 package advancedalgorithms;
 
+import static advancedalgorithms.Dynamic.LineSize;
+import static advancedalgorithms.Dynamic.sizeL;
+import static advancedalgorithms.Dynamic.wordLenth;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import java.lang.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
-import java.math.BigDecimal;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,9 +30,10 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    //int Cpu = 0;
     Timer timer;
     Timer timer2;
+    long start;
+    long finish;
     private int counter = 2;
     private int counter1 = 6;
     private int delay = 1000;
@@ -78,8 +84,6 @@ public class MainJFrame extends javax.swing.JFrame {
         timer = new Timer(delay, action1);
         timer.setInitialDelay(0);
         timer.start();
-        System.out.println("PROBLEM?");
-        //counter = 4;
         ActionListener action2 = new ActionListener()
         {   
             @Override
@@ -122,6 +126,7 @@ public class MainJFrame extends javax.swing.JFrame {
         timer2.setInitialDelay(0);
         timer2.start();
         TextEditor();
+        Graphics();
         new Thread(){
         public void run(){
             while (0 == 0){
@@ -176,6 +181,18 @@ catch(InterruptedException ex)
         jLabel4.setVisible(true);
     }
     
+    public void Graphics(){
+        GraphApp app;
+        app = new GraphApp();
+        jLabel12.add(advancedalgorithms.GraphApp.Graph2);
+        jLabel12.setBackground(new java.awt.Color(0, 172, 237,0));
+        jLabel12.setOpaque(true);
+        jLabel12.repaint();
+        app.setVisible(true);
+        pack();
+        jLabel12.setVisible(true);
+    }
+    
     
   
 
@@ -195,6 +212,12 @@ catch(InterruptedException ex)
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         alphaPaneMain = new advancedalgorithms.AlphaPane();
+        alphaPaneWords = new advancedalgorithms.AlphaPane();
+        jLabel20 = new javax.swing.JLabel();
+        jSlider2 = new javax.swing.JSlider();
+        jLabel21 = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -214,10 +237,18 @@ catch(InterruptedException ex)
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jSlider1 = new javax.swing.JSlider();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         alphaPaneResult = new advancedalgorithms.AlphaPane();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -260,11 +291,61 @@ catch(InterruptedException ex)
         alphaPaneMain.setPreferredSize(new java.awt.Dimension(1024, 768));
         alphaPaneMain.setLayout(null);
 
+        alphaPaneWords.setMinimumSize(new java.awt.Dimension(1024, 768));
+        alphaPaneWords.setLayout(null);
+
+        jLabel20.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText(String.valueOf(jSlider2.getValue()));
+        alphaPaneWords.add(jLabel20);
+        jLabel20.setBounds(30, 20, 40, 20);
+
+        jSlider2.setMaximum(1000);
+        jSlider2.setToolTipText("");
+        jSlider2.setValue(50);
+        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider2StateChanged(evt);
+            }
+        });
+        alphaPaneWords.add(jSlider2);
+        jSlider2.setBounds(10, 60, 150, 29);
+
+        jLabel21.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Words");
+        alphaPaneWords.add(jLabel21);
+        jLabel21.setBounds(90, 20, 70, 20);
+
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/oksleep.jpg"))); // NOI18N
+        jButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton16MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton16MouseExited(evt);
+            }
+        });
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        alphaPaneWords.add(jButton16);
+        jButton16.setBounds(-1, 100, 172, 54);
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/smallback.jpg"))); // NOI18N
+        alphaPaneWords.add(jLabel19);
+        jLabel19.setBounds(0, 0, 172, 151);
+
+        alphaPaneMain.add(alphaPaneWords);
+        alphaPaneWords.setBounds(730, 120, 172, 151);
+
         jLabel4.setToolTipText("");
         alphaPaneMain.add(jLabel4);
         jLabel4.setBounds(0, 50, 430, 90);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest1.jpg"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/graphssleep.jpg"))); // NOI18N
         jButton4.setMaximumSize(new java.awt.Dimension(138, 90));
         jButton4.setMinimumSize(new java.awt.Dimension(138, 90));
         jButton4.setPreferredSize(new java.awt.Dimension(138, 90));
@@ -284,7 +365,7 @@ catch(InterruptedException ex)
         alphaPaneMain.add(jButton4);
         jButton4.setBounds(610, 49, 138, 90);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest1.jpg"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/wordssleep.jpg"))); // NOI18N
         jButton5.setMaximumSize(new java.awt.Dimension(138, 90));
         jButton5.setMinimumSize(new java.awt.Dimension(138, 90));
         jButton5.setPreferredSize(new java.awt.Dimension(138, 90));
@@ -296,10 +377,15 @@ catch(InterruptedException ex)
                 jButton5MouseExited(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         alphaPaneMain.add(jButton5);
         jButton5.setBounds(747, 49, 138, 90);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest1.jpg"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/exitsleep.jpg"))); // NOI18N
         jButton6.setMaximumSize(new java.awt.Dimension(138, 90));
         jButton6.setMinimumSize(new java.awt.Dimension(138, 90));
         jButton6.setPreferredSize(new java.awt.Dimension(138, 90));
@@ -309,6 +395,11 @@ catch(InterruptedException ex)
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton6MouseExited(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
             }
         });
         alphaPaneMain.add(jButton6);
@@ -477,7 +568,7 @@ catch(InterruptedException ex)
         alphaPaneMain.add(jButton12);
         jButton12.setBounds(770, 430, 130, 35);
 
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg"))); // NOI18N
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg"))); // NOI18N
         jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton13MouseEntered(evt);
@@ -519,6 +610,53 @@ catch(InterruptedException ex)
         jLabel3.setBackground(new java.awt.Color(255, 0, 51));
         alphaPaneMain.add(jLabel3);
         jLabel3.setBounds(60, 270, 580, 250);
+
+        jSlider1.setMaximum(24);
+        jSlider1.setToolTipText("");
+        jSlider1.setValue(12);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
+        alphaPaneMain.add(jSlider1);
+        jSlider1.setBounds(790, 695, 180, 29);
+
+        jLabel13.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText(" Time:");
+        alphaPaneMain.add(jLabel13);
+        jLabel13.setBounds(420, 640, 100, 20);
+
+        jLabel14.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Compl:");
+        alphaPaneMain.add(jLabel14);
+        jLabel14.setBounds(420, 680, 70, 20);
+
+        jLabel15.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("---");
+        alphaPaneMain.add(jLabel15);
+        jLabel15.setBounds(530, 640, 110, 20);
+
+        jLabel16.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText(String.valueOf(jSlider1.getValue()));
+        alphaPaneMain.add(jLabel16);
+        jLabel16.setBounds(730, 700, 30, 20);
+
+        jLabel17.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("---");
+        alphaPaneMain.add(jLabel17);
+        jLabel17.setBounds(530, 680, 60, 20);
+
+        jLabel18.setFont(new java.awt.Font("Myriad Pro", 0, 20));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("s");
+        alphaPaneMain.add(jLabel18);
+        jLabel18.setBounds(620, 640, 100, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bigback.jpg"))); // NOI18N
         alphaPaneMain.add(jLabel1);
@@ -563,8 +701,17 @@ catch(InterruptedException ex)
                 jButton15MouseExited(evt);
             }
         });
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
         alphaPaneResult.add(jButton15);
         jButton15.setBounds(502, 593, 138, 90);
+        alphaPaneResult.add(jLabel12);
+        jLabel12.setBounds(240, 280, 550, 230);
+        GraphApp app = new GraphApp();
+        jLabel12.add(app);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/final.jpg"))); // NOI18N
         jLabel11.setBounds(new java.awt.Rectangle(0, 0, 1024, 768));
@@ -595,27 +742,27 @@ catch(InterruptedException ex)
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest2.jpg")));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/graphsup.jpg")));
     }//GEN-LAST:event_jButton4MouseEntered
 
     private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest1.jpg")));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/graphssleep.jpg")));
     }//GEN-LAST:event_jButton4MouseExited
 
     private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest2.jpg")));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/wordsup.jpg")));
     }//GEN-LAST:event_jButton5MouseEntered
 
     private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest1.jpg")));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/wordssleep.jpg")));
     }//GEN-LAST:event_jButton5MouseExited
 
     private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
-       jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest2.jpg")));
+       jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/exitup.jpg")));
     }//GEN-LAST:event_jButton6MouseEntered
 
     private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
-       jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/buttontest1.jpg")));
+       jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/exitsleep.jpg")));
     }//GEN-LAST:event_jButton6MouseExited
 
     private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
@@ -687,7 +834,13 @@ catch(InterruptedException ex)
     }//GEN-LAST:event_jButton10MouseExited
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+                    jPanel1.removeAll();
+                    alphaPaneResult.setAlpha(1.0f);
+                    jPanel1.add(alphaPaneResult);
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
+                    jLabel12.removeAll();
+                    Graphics();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -776,22 +929,23 @@ catch(InterruptedException ex)
     }//GEN-LAST:event_jButton12MouseExited
 
     private void jButton13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseEntered
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bruteup.jpg")));
         if (buttonCounter==5){
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
             }
         else{
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep2.jpg")));
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
         }
     }//GEN-LAST:event_jButton13MouseEntered
 
     private void jButton13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseExited
         if (buttonCounter==5){
-            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bruteup.jpg")));
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
         }
         else{
-            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
         }
     }//GEN-LAST:event_jButton13MouseExited
@@ -997,7 +1151,17 @@ catch(InterruptedException ex)
         buttonCounter = 4;
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicup.jpg")));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        start = System.nanoTime();
         Dynamic approach = new Dynamic();
+        System.out.println(LineSize);
+        approach.DynamicSolution (wordLenth, sizeL, LineSize);
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+        double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
+        jLabel15.setText(String.valueOf(elapsedTimeInSecond));
+        jLabel15.revalidate();
+        jLabel15.repaint();
+        System.out.println(timeElapsed);
         
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -1049,14 +1213,15 @@ catch(InterruptedException ex)
                 jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
                 break;
             case 5:
-                jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
+                jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
                 jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
                 break;
             default:
         }
         buttonCounter = 5;
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bruteup.jpg")));
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1097,7 +1262,10 @@ catch(InterruptedException ex)
     }//GEN-LAST:event_jButton14MouseExited
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
+                    jPanel1.removeAll();
+                    jPanel1.add(alphaPaneMain);
+                    jPanel1.revalidate();
+                    jPanel1.repaint();
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseEntered
@@ -1107,6 +1275,47 @@ catch(InterruptedException ex)
     private void jButton15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseExited
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/savesleep.jpg")));
     }//GEN-LAST:event_jButton15MouseExited
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+        jLabel16.setText(String.valueOf(jSlider1.getValue()));
+        jLabel16.revalidate();
+        jLabel16.repaint();
+    }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
+        jLabel20.setText(String.valueOf(jSlider2.getValue()));
+        jLabel20.revalidate();
+        jLabel20.repaint();
+    }//GEN-LAST:event_jSlider2StateChanged
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        alphaPaneWords.setAlpha(1.0f);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        alphaPaneWords.setAlpha(0.0f);
+        try {
+            FileScanner f = new FileScanner();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseEntered
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/okup.jpg")));
+    }//GEN-LAST:event_jButton16MouseEntered
+
+    private void jButton16MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseExited
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/oksleep.jpg")));
+    }//GEN-LAST:event_jButton16MouseExited
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1143,12 +1352,14 @@ catch(InterruptedException ex)
         });
     }
     
+    public static long timeElapsed;
     public static AnimationController controller;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private advancedalgorithms.AlphaPane alphaPaneIntro;
     private advancedalgorithms.AlphaPane alphaPaneMain;
     private advancedalgorithms.AlphaPane alphaPanePreIntro;
     private advancedalgorithms.AlphaPane alphaPaneResult;
+    private advancedalgorithms.AlphaPane alphaPaneWords;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1156,6 +1367,7 @@ catch(InterruptedException ex)
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1167,7 +1379,17 @@ catch(InterruptedException ex)
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     public static javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1176,5 +1398,7 @@ catch(InterruptedException ex)
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    public static javax.swing.JSlider jSlider1;
+    public static javax.swing.JSlider jSlider2;
     // End of variables declaration//GEN-END:variables
 }
