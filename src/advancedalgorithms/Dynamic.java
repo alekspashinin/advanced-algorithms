@@ -19,7 +19,7 @@ public class Dynamic{
   
     /* Declaration of variables */
     static ArrayList<String> words= new ArrayList<>();
-    final static int MAX = Integer.MAX_VALUE;
+    final static int MAX = Integer.MAX_VALUE; //this is correct 2 lines
     final static int LineSize = advancedalgorithms.MainJFrame.jSlider1.getValue(); //Line Width
     static int sizeL;
     static String[] line;
@@ -56,11 +56,11 @@ public class Dynamic{
     /* Generak function */
     void DynamicSolution (int ListOfWords[], int sizeL, int LineSize){ 
         
-        /* Declaration of variables */
+        /* Declaration of variables */ 
         int totalSpaces[][] = new int[sizeL][sizeL]; 
         int lc[][]= new int[sizeL][sizeL]; //PAS BESOINb
         int minCost[] = new int[sizeL+1];
-        minCost[0] = 0; 
+        minCost[0] = 0; // this is right
         int result[] =new int[sizeL]; 
         
         /* Calculation cost of putting words from i to j */
@@ -122,5 +122,5 @@ public class Dynamic{
         wordLengths();
         sizeL = wordLenth.length-1;
     }
+}
 
-} 

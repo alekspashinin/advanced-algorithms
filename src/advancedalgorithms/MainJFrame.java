@@ -933,7 +933,7 @@ catch(InterruptedException ex)
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
             jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
             }
-        else{
+        else{ 
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep2.jpg")));
             jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
         }
@@ -1162,7 +1162,7 @@ catch(InterruptedException ex)
         buttonCounter = 4;
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicup.jpg")));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
-        start = System.nanoTime();
+        start = System.nanoTime(); 
         Dynamic approach = new Dynamic();
         System.out.println(LineSize);
         approach.DynamicSolution (wordLenth, sizeL, LineSize);
