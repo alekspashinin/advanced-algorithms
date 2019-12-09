@@ -5,6 +5,7 @@
  */
 package advancedalgorithms;
 
+import DAC.Divide_and_conquer;
 import greedy.GreedyOps;
 import java.util.ArrayList;
 
@@ -106,8 +107,6 @@ public class test {
                 
             }
         
-	
-	
 
 	public static void main(String[] args) {
 //		findWordLengths();
@@ -117,6 +116,8 @@ public class test {
 //		for (int i = 1; i < track.length; i++) {
 //			System.out.println(track[i]);
 //		}
+            
+//            ************************greedy test
             ArrayList<String> str=new ArrayList<String>();
             str.add("judi");
             str.add("messi");
@@ -125,10 +126,24 @@ public class test {
             str.add("gurnici");
             str.add("maniam");
             str.add("connet");
-            GreedyOps go=new GreedyOps(str);
-            System.out.println("RUnning");
-            go.callGreedy();
+            str.add("gurnici");
+            str.add("maniam");
+            str.add("connet");
+            str.add("gurnici");
+            str.add("maniam");
+            str.add("connet");
+//            GreedyOps go=new GreedyOps(str);
 
+            Divide_and_conquer dac=new Divide_and_conquer(str);
+            dac.divide_and_conquer(str.get(0));
+            System.out.println("Running");
+//            go.callGreedy();
+
+            String s ="123456789abcdefgh";
+String sub = s.substring(0, 10);
+String remainder = s.substring(10);
+
+            System.out.println(sub);
 	}
 
 }

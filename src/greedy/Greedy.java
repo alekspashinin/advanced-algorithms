@@ -41,18 +41,24 @@ public class Greedy {
              tempLenth=tempLenth +words.get(k).length();
              if (tempLenth <= m)
              {
-               solution=solution+" "+words.get(k);// adding word to the line
+                 if(k==0)
+               solution=solution+words.get(k);// adding word to the line
 //               solution[k]+=wordList[k]; 
-               lc=m-tempLenth; //getting current line cost  
+              
+                   if(k!=0)
+               solution=solution+" "+words.get(k);// adding word to the line
+//             
+                 lc=m-tempLenth; //getting current line cost  
                tempLenth+=1; // adding space charactor
              }
              else
              {
-                 lineCostArray[lcac]=lc;
-                 totalLineCost=totalLineCost+lc;
+                 lineCostArray[lcac]=lc*lc*lc;
+                 totalLineCost=totalLineCost+lineCostArray[lcac];
                  solution=solution+"/n";
                  lc=0;
                  tempLenth=0;
+                 lcac++;
              }
          }// end of loof
          

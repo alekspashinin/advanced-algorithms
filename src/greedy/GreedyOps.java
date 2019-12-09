@@ -14,7 +14,7 @@ public class GreedyOps {
  ArrayList<String> wordList;
     public GreedyOps(ArrayList<String> words) {
 //        advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + words.get(i-1)+" ");
-//                advancedalgorithms.TextEditor.editor.getText()
+//        advancedalgorithms.TextEditor.editor.getText()
     wordList=words;
     }
     
