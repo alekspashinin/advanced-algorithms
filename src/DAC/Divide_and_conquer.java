@@ -93,7 +93,7 @@ public class Divide_and_conquer {
             
             if(actualWord.length()!=lastWord.length())
             {
-                //come here to check 
+                //come here to check **********************
               devided.add(i+1,addString(devided.get(i+1),lastWord,0));
               //have to remove the moved string from devided[i[;
               String original = devided.get(i);
