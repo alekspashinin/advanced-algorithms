@@ -7,8 +7,6 @@
  *
  *                   Advanced Algorithms Project
  *
- * 
- * 
  */
 package advancedalgorithms;
 
@@ -21,37 +19,33 @@ public class Dynamic{
   
     /* Declaration of variables */
     static ArrayList<String> words= new ArrayList<>();
-    final int MAX = Integer.MAX_VALUE;
-    final static int LineSize = 6;
+    final static int MAX = Integer.MAX_VALUE; //this is correct 2 lines
+    final static int LineSize = advancedalgorithms.MainJFrame.jSlider1.getValue(); //Line Width
     static int sizeL;
     static String[] line;
     static int[] wordLenth;
     
     
     
-    int doResult (int p[], int n){ 
-        int i,k; 
-        if (p[n] == 1) 
-        k = 1; 
-        else
-        k = doResult (p, p[n]-1) + 1; 
-        for (i=p[n]; i<=n; i++){
-            if(wordLenth[i]==0){
+    void doResult (int result[], int sizeL){ 
+        int j, i=0;
+        StringBuilder builder = new StringBuilder();
+        do{
+            j = result[i];
+            for(int k=i; k < j; k++){
+                builder.append(line[k]+ " ");
             }
-            else{
-                advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + words.get(i-1)+" ");
-                System.out.print(words.get(i-1)+" ");
-            }
-        }
-        advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + "\n");
-        System.out.println();
-        return k; 
+            builder.append("\n");
+            i = j;
+        }while(j < sizeL);
+        advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + builder.toString());
+        System.out.println(builder.toString());
     }
     
     
     /* Calculation the lengths of words */
     static void wordLengths() {
-		int i =1;
+		int i =0;
 		for (String word : line) {
                         words.add(word);
 			wordLenth[i] = word.length();
@@ -60,60 +54,66 @@ public class Dynamic{
 	}
   
     /* Generak function */
-    void DynamicSolution (int l[], int sizeL, int LineSize){ 
+    void DynamicSolution (int ListOfWords[], int sizeL, int LineSize){ 
         
-        /* Declaration of variables */
-        int totalSpaces[][] = new int[sizeL+1][sizeL+1]; 
-        int lc[][]= new int[sizeL+1][sizeL+1]; 
-        int totalCost[] = new int[sizeL+1];
-        totalCost[0] = 0; 
-        int p[] =new int[sizeL+1]; 
+        /* Declaration of variables */ 
+        int totalSpaces[][] = new int[sizeL][sizeL]; 
+        int lc[][]= new int[sizeL][sizeL]; //PAS BESOINb
+        int minCost[] = new int[sizeL+1];
+        minCost[0] = 0; // this is right
+        int result[] =new int[sizeL]; 
         
-        /* Calculation */
-        for (int i = 1; i <= sizeL; i++){ 
-            totalSpaces[i][i] = LineSize - l[i-1]; 
-            for (int j = i+1; j <= sizeL; j++) 
-            totalSpaces[i][j] = totalSpaces[i][j-1] - l[j-1] - 1; 
+        /* Calculation cost of putting words from i to j */
+        for (int i = 0; i < sizeL; i++){ 
+            totalSpaces[i][i] = LineSize - ListOfWords[i]; 
+            for (int j = i+1; j < sizeL; j++){ 
+                totalSpaces[i][j] = totalSpaces[i][j-1] - ListOfWords[j] - 1;
+            }
         } 
-          
-        for (int i = 1; i <= sizeL; i++){ 
-            for (int j = i; j <= sizeL; j++){ 
-                if (totalSpaces[i][j] < 0) 
-                    lc[i][j] = MAX; 
-                else if (j == sizeL && totalSpaces[i][j] >= 0) 
-                    lc[i][j] = 0; 
-                else
-                    lc[i][j] = totalSpaces[i][j]^2; 
-            } 
-        } 
-          
-        for (int j = 1; j <= sizeL; j++) { 
-            totalCost[j] = MAX; 
-            for (int i = 1; i <= j; i++) { 
-                if (totalCost[i-1] != MAX && lc[i][j] != MAX &&  
-                   (totalCost[i-1] + lc[i][j] < totalCost[j])) { 
-                    totalCost[j] = totalCost[i-1] + lc[i][j]; 
-                    p[j] = i; 
-                } 
-            } 
+        
+        for(int i=0; i < sizeL; i++){
+            for(int j=i; j < sizeL; j++){
+                if(totalSpaces[i][j] < 0){
+                    totalSpaces[i][j] = Integer.MAX_VALUE;
+                }else{
+                    totalSpaces[i][j] = (int)Math.pow(totalSpaces[i][j], 2);
+                }
+            }
         }
+        
+        
+        for(int i = sizeL-1; i >= 0 ; i--){
+            minCost[i] = totalSpaces[i][sizeL-1];
+            result[i] = sizeL;
+            for(int j=sizeL-1; j > i; j--){
+                if(totalSpaces[i][j-1] == Integer.MAX_VALUE){
+                    continue;
+                }
+                if(minCost[i] > minCost[j] + totalSpaces[i][j-1]){
+                    minCost[i] = minCost[j] + totalSpaces[i][j-1];
+                    result[i] = j;
+                }
+            }
+        }
+        
         advancedalgorithms.TextEditor.editor.setText("");
-        doResult(p, sizeL);
+        doResult(result, sizeL);
+        
     }
     
-    
-    /*public static void main(String[] args) {
+    /*
+    public static void main(String[] args) {
         //String temp = advancedalgorithms.MainJFrame.jLabel3.getText();
-        String temp = "This is the text just to test my algo and i will see the result";
+        String temp = "This is the text just to test";
         line = temp.split(" ");
-        wordLenth = new int[line.length+1];
-        Dynamic approach = new Dynamic();
+        wordLenth = new int[line.length];
+        Dynamic test = new Dynamic();
         wordLengths();
-        int n = wordLenth.length-1;
-        System.out.println("n="+n);
-        approach.solveWordWrap (wordLenth, n, M);
-    }*/
-  
+        System.out.println("wordLenth="+wordLenth.length);
+        test.DynamicSolution (wordLenth, wordLenth.length, LineSize);
+    }
+    */
+    
     public Dynamic(){
         String temp = advancedalgorithms.TextEditor.editor.getText();
         System.out.println(temp);
@@ -122,4 +122,5 @@ public class Dynamic{
         wordLengths();
         sizeL = wordLenth.length-1;
     }
-} 
+}
+
