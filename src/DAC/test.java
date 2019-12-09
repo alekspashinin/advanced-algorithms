@@ -118,19 +118,12 @@ public class test {
             
 //            ************************greedy test
             ArrayList<String> str=new ArrayList<String>();
-            String string="judi messi lob";
-            str.add("judi");
-            str.add("messi");
-            str.add("lob");
-            
-            str.add("gurnici");
-            str.add("gurnici");
-            str.add("gurnici");
             str.add("maniam");
-            
+            str.add("sadasd");
+            str.add("adsd");
             Divide_and_conquer dac=new Divide_and_conquer(str);
-            
-//            dac.divide_and_conquer();
+            dac.divide_and_conquer("maniam sadasd adsd");
+//            dac.divide_and_conquer();  asd ds asdasd sd asd
             
             
             

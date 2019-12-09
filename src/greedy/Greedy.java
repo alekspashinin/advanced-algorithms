@@ -48,7 +48,7 @@ public class Greedy {
                solution=solution+" "+words.get(k);// adding word to the line
 //             
                  lc=m-tempLenth; //getting current line cost  
-               tempLenth+=1; // adding space charactor
+               tempLenth++; // adding space charactor
              }
              else
              {

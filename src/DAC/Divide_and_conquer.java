@@ -25,6 +25,9 @@ public class Divide_and_conquer {
     
     public int[] divide_and_conquer(String wordText)
     {
+        try {
+            
+        
          int l=0; //current state of line size
          int m=10; //size of the line with
          int lc=0;
@@ -40,78 +43,79 @@ public class Divide_and_conquer {
          {
           loopCount++;
          }
-          String[] devided = new String[loopCount];
+          ArrayList<String> devided = new ArrayList<String>();;
           int startingPos=0;
-         for (int i = 0; i <= loopCount; i++) {
-             devided[i] = wordText.substring(startingPos, m);
+         
+          int arrayCount=0;
+         for (int i = 1; i <= loopCount; i++) {
+  
+             if(i==loopCount)
+            {  //,stringLen
+                devided.add(arrayCount, wordText.substring(startingPos));
+            }  
+             else{
+               devided.add(arrayCount,wordText.substring(startingPos, m));
+             }
              startingPos +=m;
+             arrayCount++;
          }
          int countOfWordCurrent=0;
          String[] spilitedArray;
          int countOfWordsOfEachLine;
          String lastWord;
-         String actualWord;
+         String actualWord="";
 
          //Logic
-         for (int i = 0; i < 10; i++) {
-            spilitedArray= devided[i].split("\\s+");//each line string wil be inserted to array
+         for (int i = 0; i < loopCount; i++) {
+            spilitedArray= devided.get(i).split("\\s+");//each line string wil be inserted to array
             countOfWordsOfEachLine= spilitedArray.length;
+            countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1);
             lastWord=spilitedArray[countOfWordsOfEachLine-1]; //got the last word
+            
             actualWord=words.get(countOfWordCurrent);//get actual comparing word
-               //resizing the words by considering line space limit
-            if(devided[i].length()>m)
+                
+            //resizing the words by considering line space limit
+            if(devided.get(i).length()>m)
             {
             //have to add the last from string from devided[i] to devided[i+1];
-             devided[i+1]=addString(devided[i+1],lastWord,0); //we adding to next line if it is not fitting
-            
+           // devided[i+1]=addString(devided[i+1],lastWord,0); //we adding to next line if it is not fitting
+             devided.add(i+1,addString(devided.get(i+1),lastWord,0));
             //have to remove the last from string from devided[i[;
-             String original = devided[i+1];
+             String original = devided.get(i+1);
              String newString = original.replace(" "+lastWord,"");
-             devided[i]=newString;
+             devided.add(i,newString);
              
            
-             spilitedArray= devided[i].split("\\s+");//each line string wil be inserted to array
+             spilitedArray= devided.get(i).split("\\s+");//each line string wil be inserted to array
              countOfWordsOfEachLine= spilitedArray.length;//this is actually last word count of the line
              lastWord=spilitedArray[countOfWordsOfEachLine-1]; //got the last word
             }
             
             if(actualWord.length()!=lastWord.length())
             {
-              devided[i+1]=addString(devided[i+1],lastWord,0);
+                //come here to check 
+              devided.add(i+1,addString(devided.get(i+1),lastWord,0));
               //have to remove the moved string from devided[i[;
-              String original = devided[i+1];
+              String original = devided.get(i);
               String newString = original.replace(" "+lastWord,"");
-              devided[i]=newString;
+              devided.add(i,newString);
             }
-            countOfWordCurrent=countOfWordCurrent+countOfWordsOfEachLine; //storing word count to maintain its state
+           
+//            countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1); //storing word count to maintain its state
             
          }
 
          
 
-//*********************************
-         for (int k = 0; k < count; k++) {
-             tempLenth=tempLenth +words.get(k).length();
-             if (tempLenth <= m)
-             {
-               solution=solution+" "+words.get(k);// adding word to the line
-               lc=m-tempLenth; //getting current line cost  
-               tempLenth+=1; // adding space charactor
-             }
-             else
-             {
-                 lineCostArray[lcac]=lc;
-                 totalLineCost=totalLineCost+lc;
-                 solution=solution+"/n";
-                 lc=0;
-                 tempLenth=0;
-             }
-         }// end of loof
-         
-         System.out.println(solution );
+//************************
          System.out.println(totalLineCost );
          
          return lineCostArray;
+         
+         } catch (Exception e) {
+                System.out.print(e.getMessage());
+         }
+        return null;
      }
     
     
