@@ -24,17 +24,16 @@ public class Greedy {
     
      public int[] greedy()
      {
-         
          System.out.println("greedy reached");
          int l=0; //current state of line size
-         int m=10; //size of the line with
+         int m=20; //size of the line with
          int lc=0;
          int totalLineCost=0;//total cost
          int[] lineCostArray=new int[count]; //each line cost
          String solution= "";
          int lcac=0;//count variable to store line cost array
          int tempLenth=0;
-
+ 
          for (int k = 0; k < count; k++) {
              
 //             tempLenth= tempLenth+wordList[k].length();

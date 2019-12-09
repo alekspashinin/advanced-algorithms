@@ -23,10 +23,8 @@ public class Divide_and_conquer {
         count=this.words.size();
     }
     
-    
     public int[] divide_and_conquer(String wordText)
     {
-         
          int l=0; //current state of line size
          int m=10; //size of the line with
          int lc=0;
@@ -38,7 +36,6 @@ public class Divide_and_conquer {
          int stringLen=wordText.length();
          int loopCount=stringLen/m;
          int remindr=stringLen%m;
-         
          if(remindr>0)
          {
           loopCount++;
@@ -46,26 +43,20 @@ public class Divide_and_conquer {
           String[] devided = new String[loopCount];
           int startingPos=0;
          for (int i = 0; i <= loopCount; i++) {
-             
              devided[i] = wordText.substring(startingPos, m);
-             startingPos+=m;
+             startingPos +=m;
          }
-         
-         
          int countOfWordCurrent=0;
          String[] spilitedArray;
          int countOfWordsOfEachLine;
          String lastWord;
          String actualWord;
-   
+
          //Logic
          for (int i = 0; i < 10; i++) {
-             
-             
             spilitedArray= devided[i].split("\\s+");//each line string wil be inserted to array
             countOfWordsOfEachLine= spilitedArray.length;
             lastWord=spilitedArray[countOfWordsOfEachLine-1]; //got the last word
-             
             actualWord=words.get(countOfWordCurrent);//get actual comparing word
                //resizing the words by considering line space limit
             if(devided[i].length()>m)
@@ -91,17 +82,14 @@ public class Divide_and_conquer {
               String original = devided[i+1];
               String newString = original.replace(" "+lastWord,"");
               devided[i]=newString;
-
-
             }
             countOfWordCurrent=countOfWordCurrent+countOfWordsOfEachLine; //storing word count to maintain its state
             
          }
+
          
-         
-         
-         
-         //*********************************
+
+//*********************************
          for (int k = 0; k < count; k++) {
              tempLenth=tempLenth +words.get(k).length();
              if (tempLenth <= m)

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package advancedalgorithms;
+package greedy;
 
 import DAC.Divide_and_conquer;
-import greedy.GreedyOps;
 import java.util.ArrayList;
 
 
@@ -108,8 +107,16 @@ public class test {
             }
         
 
-public static void main(String[] args) {
-
+	public static void main(String[] args) {
+//		findWordLengths();
+//		createCostTable();
+//		JustifyText();
+//                printText2();
+//		for (int i = 1; i < track.length; i++) {
+//			System.out.println(track[i]);
+//		}
+            
+//            ************************greedy test
             ArrayList<String> str=new ArrayList<String>();
             str.add("judi");
             str.add("messi");
@@ -127,8 +134,13 @@ public static void main(String[] args) {
             GreedyOps go=new GreedyOps(str);
 
             
-            Divide_and_conquer dac=new Divide_and_conquer(str);
-                dac.divide_and_conquer("maniam sad asd adsdasd ds asdasd sd asd");
+            go.callGreedy();
+
+//            String s ="123456789abcdefgh";
+//String sub = s.substring(0, 10);
+//String remainder = s.substring(10);
+
+//            System.out.println(sub);
 	}
 
 }
