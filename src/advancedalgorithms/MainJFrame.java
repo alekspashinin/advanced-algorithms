@@ -977,6 +977,17 @@ catch(InterruptedException ex)
                 buttonCounter = 1;
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bruteup.jpg")));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        start = System.nanoTime();
+        BruteForce approach2 = new BruteForce();
+        System.out.println(LineSize);
+        approach2.BruteSolution (wordLenth, sizeL, LineSize);
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+        double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
+        jLabel15.setText(String.valueOf(elapsedTimeInSecond));
+        jLabel15.revalidate();
+        jLabel15.repaint();
+        System.out.println(timeElapsed);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
