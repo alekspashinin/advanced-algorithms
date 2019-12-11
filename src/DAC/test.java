@@ -108,13 +108,6 @@ public class test {
         
 
 	public static void main(String[] args) {
-//		findWordLengths();
-//		createCostTable();
-//		JustifyText();
-//                printText2();
-//		for (int i = 1; i < track.length; i++) {
-//			System.out.println(track[i]);
-//		}
             
 //            ************************greedy test
             ArrayList<String> str=new ArrayList<String>();
@@ -122,17 +115,11 @@ public class test {
             str.add("iam");
             str.add("sadasd");
             str.add("adsd");
+            str.add("adsd");
             Divide_and_conquer dac=new Divide_and_conquer(str);
-            dac.divide_and_conquer("man iam sadas adsd");
+            dac.divide_and_conquer("man iam sadas adsd adsd");
 
-//            dac.divide_and_conquer();  asd ds asdasd sd asd
             
-            
-            
-//String s ="123456789abcdefgh";
-//String sub = s.substring(0, 10);
-//String remainder = s.substring(10);
-//            System.out.println(sub);
 	}
 
 }

@@ -1075,7 +1075,7 @@ catch(InterruptedException ex)
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
         start = System.nanoTime();
         BranchInBound test = new BranchInBound();
-        test.test();
+        test.start();
         
         //approach.DynamicSolution (wordLenth, sizeL, LineSize);
         finish = System.nanoTime();

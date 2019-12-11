@@ -25,7 +25,7 @@ public class BranchInBound {
     }
     
     
-    public  void  process(ArrayList<String> wordList)
+    public static void  process(ArrayList<String> wordList)
     {
         
          int line=0; //current state of line size
@@ -33,8 +33,8 @@ public class BranchInBound {
          int m=advancedalgorithms.MainJFrame.jSlider1.getValue(); //size of the line with
          int current_cost=0;
          int minCost=m;//total cost\
-         int[] cost_array=new int[100];
-         String[][] line_word_array= new String[10][10];
+         int[] cost_array=new int[30];
+         String[][] line_word_array= new String[50][20];
          int countOfLoop=0;
          String solution="";
          
@@ -45,10 +45,8 @@ public class BranchInBound {
              
              if(word==0)
 		current_cost = m - wordList.get(i).length();
- 
              else
-                 current_cost = current_cost - wordList.get(i).length();
-             
+                 current_cost = current_cost - wordList.get(i).length();             
              if (current_cost<=0)
              {
                  cost_array[line]=minCost;
@@ -103,7 +101,7 @@ public class BranchInBound {
           SpaceComplexity(totalCost);
     }
     
-    public void SpaceComplexity(int totalCost)
+    public static void SpaceComplexity(int totalCost)
     {
      System.out.println("Space Complexity " +totalCost); //total Cost
        
@@ -127,25 +125,11 @@ public class BranchInBound {
     {
         String temp = advancedalgorithms.TextEditor.editor.getText();
         ArrayList<String> str=new ArrayList<String>();
-            str.add("judi");
-            str.add("messi");
-            str.add("lob");
             
-//            str.add("gurnici");
-//            str.add("gurnici");
-//            str.add("gurnici");
-//            str.add("maniam");
-//            str.add("connet");
-//            str.add("gurnici");
-//            str.add("maniam");
-//            str.add("connet");
-//            str.add("gurnici");
-//            str.add("maniam");
-//            str.add("connet");
-
-//    process(str);
+            process(str);
     }
     
-   
+    
+  
     
 }

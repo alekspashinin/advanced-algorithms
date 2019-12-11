@@ -42,7 +42,7 @@ public class Divide_and_conquer {
          if(remindr>0)
          {
         
-             loopCount++;
+//             loopCount++;
          }
           ArrayList<String> devided = new ArrayList<String>();;
           int startingPos=0;
@@ -73,7 +73,8 @@ public class Divide_and_conquer {
         boolean looprun=true;
         while(looprun)
          {
-            spilitedArray= devided.get(i).split("\\s+");//each line string wil be inserted to array
+//             line = temp.split(" ");
+            spilitedArray= devided.get(i).split(" ");//each line string wil be inserted to array
             countOfWordsOfEachLine= spilitedArray.length;
             countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1);
             lastWord=spilitedArray[countOfWordsOfEachLine-1]; //got the last word
@@ -87,14 +88,14 @@ public class Divide_and_conquer {
              // devided[i+1]=addString(devided[i+1],lastWord,0); //we adding to next line if it is not fitting
                 
              //this means there is no next element
-             if((devided.size()-1)==i)
+             if((devided.size())==i)
              {
                  devided.add(i+1,lastWord);
                
              }
              else{
               //we adding half last word of current loop to next line in first position. so it will join with rest of the word
-             String newStringN=addString(devided.get(i+1),lastWord,0);
+             String newStringN=addString(devided.get(i),lastWord,0);
              devided.remove(i+1);
              devided.add(i+1,newStringN);
              
@@ -126,15 +127,22 @@ public class Divide_and_conquer {
            
 //            countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1); //storing word count to maintain its state
             i++;
-            if(i==devided.size()-1)
+            int a=devided.size();
+            if(i==a)
             {
             looprun=false;
             }
-            System.out.println(devided.get(i));
+           
          }
 
          
 
+        String a="";
+        for (String item : devided) 
+        { 
+            a+=item;
+        }
+        System.out.println(a );
 //************************
 //         System.out.println(totalLineCost );
 //         
