@@ -19,14 +19,14 @@ public class Dynamic{
   
     /* Declaration of variables */
     static ArrayList<String> words= new ArrayList<>();
-    final static int MAX = Integer.MAX_VALUE; //this is correct 2 lines
+    final static int MAX = Integer.MAX_VALUE;
     final static int LineSize = advancedalgorithms.MainJFrame.jSlider1.getValue(); //Line Width
     static int sizeL;
     static String[] line;
     static int[] wordLenth;
     
     
-    
+    /* Printing results */
     void doResult (int result[], int sizeL){ 
         int j, i=0;
         StringBuilder builder = new StringBuilder();
@@ -39,7 +39,6 @@ public class Dynamic{
             i = j;
         }while(j < sizeL);
         advancedalgorithms.TextEditor.editor.setText(advancedalgorithms.TextEditor.editor.getText() + builder.toString());
-        System.out.println(builder.toString());
     }
     
     
@@ -53,14 +52,13 @@ public class Dynamic{
 		}
 	}
   
-    /* Generak function */
+    /* General function */
     void DynamicSolution (int ListOfWords[], int sizeL, int LineSize){ 
         
-        /* Declaration of variables */ 
+        /* Declaration of variables */
         int totalSpaces[][] = new int[sizeL][sizeL]; 
-        int lc[][]= new int[sizeL][sizeL]; //PAS BESOINb
         int minCost[] = new int[sizeL+1];
-        minCost[0] = 0; // this is right
+        minCost[0] = 0; 
         int result[] =new int[sizeL]; 
         
         /* Calculation cost of putting words from i to j */
@@ -89,7 +87,7 @@ public class Dynamic{
                 if(totalSpaces[i][j-1] == Integer.MAX_VALUE){
                     continue;
                 }
-                if(minCost[i] > minCost[j] + totalSpaces[i][j-1]){
+                    if(minCost[i] > minCost[j] + totalSpaces[i][j-1]){
                     minCost[i] = minCost[j] + totalSpaces[i][j-1];
                     result[i] = j;
                 }
@@ -100,19 +98,7 @@ public class Dynamic{
         doResult(result, sizeL);
         
     }
-    
-    /*
-    public static void main(String[] args) {
-        //String temp = advancedalgorithms.MainJFrame.jLabel3.getText();
-        String temp = "This is the text just to test";
-        line = temp.split(" ");
-        wordLenth = new int[line.length];
-        Dynamic test = new Dynamic();
-        wordLengths();
-        System.out.println("wordLenth="+wordLenth.length);
-        test.DynamicSolution (wordLenth, wordLenth.length, LineSize);
-    }
-    */
+   
     
     public Dynamic(){
         String temp = advancedalgorithms.TextEditor.editor.getText();
@@ -121,6 +107,7 @@ public class Dynamic{
         wordLenth = new int[line.length+1];
         wordLengths();
         sizeL = wordLenth.length-1;
+        System.out.println("INT-D="+sizeL);
     }
-}
 
+} 

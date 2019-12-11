@@ -10,14 +10,13 @@
  */
 package advancedalgorithms;
 
-import static advancedalgorithms.Dynamic.LineSize;
-import static advancedalgorithms.Dynamic.sizeL;
-import static advancedalgorithms.Dynamic.wordLenth;
+import BranchAndBound.BranchInBound;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import java.lang.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -244,6 +243,8 @@ catch(InterruptedException ex)
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         alphaPaneResult = new advancedalgorithms.AlphaPane();
         jButton14 = new javax.swing.JButton();
@@ -302,7 +303,6 @@ catch(InterruptedException ex)
 
         jSlider2.setMaximum(1000);
         jSlider2.setToolTipText("");
-        jSlider2.setValue(50);
         jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider2StateChanged(evt);
@@ -658,6 +658,42 @@ catch(InterruptedException ex)
         alphaPaneMain.add(jLabel18);
         jLabel18.setBounds(620, 640, 100, 20);
 
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg"))); // NOI18N
+        jButton17.setToolTipText("");
+        jButton17.setSize(new java.awt.Dimension(42, 42));
+        jButton17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton17MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton17MouseExited(evt);
+            }
+        });
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+        alphaPaneMain.add(jButton17);
+        jButton17.setBounds(720, 530, 42, 42);
+
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg"))); // NOI18N
+        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton18MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton18MouseExited(evt);
+            }
+        });
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+        alphaPaneMain.add(jButton18);
+        jButton18.setBounds(770, 530, 130, 35);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bigback.jpg"))); // NOI18N
         alphaPaneMain.add(jLabel1);
         jLabel1.setBounds(0, -30, 1310, 800);
@@ -804,7 +840,7 @@ catch(InterruptedException ex)
     }//GEN-LAST:event_jButton9MouseExited
 
     private void jButton11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseEntered
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bruteup.jpg")));
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
         if (buttonCounter==5){
             jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
             }
@@ -814,7 +850,7 @@ catch(InterruptedException ex)
     }//GEN-LAST:event_jButton11MouseEntered
 
     private void jButton11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseExited
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
     }//GEN-LAST:event_jButton11MouseExited
 
@@ -928,28 +964,6 @@ catch(InterruptedException ex)
         }
     }//GEN-LAST:event_jButton12MouseExited
 
-    private void jButton13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseEntered
-        if (buttonCounter==5){
-            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
-            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
-            }
-        else{ 
-            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep2.jpg")));
-            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
-        }
-    }//GEN-LAST:event_jButton13MouseEntered
-
-    private void jButton13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseExited
-        if (buttonCounter==5){
-            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
-            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
-        }
-        else{
-            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
-            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
-        }
-    }//GEN-LAST:event_jButton13MouseExited
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         switch(buttonCounter){
             case 1:
@@ -972,15 +986,24 @@ catch(InterruptedException ex)
                 jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
                 jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
                 break;
+            case 6:
+                jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+                jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+                break;
             default:
         }
-                buttonCounter = 1;
+        buttonCounter = 1;
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/bruteup.jpg")));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
         start = System.nanoTime();
-        BruteForce approach2 = new BruteForce();
-        System.out.println(LineSize);
-        approach2.BruteSolution (wordLenth, sizeL, LineSize);
+        BruteForce approach2;
+        try {
+            approach2 = new BruteForce();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         finish = System.nanoTime();
         timeElapsed = finish - start;
         double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
@@ -1041,11 +1064,27 @@ catch(InterruptedException ex)
                 jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
                 jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
                 break;
+            case 6:
+                jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+                jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+                break;
             default:
         }
         buttonCounter = 2;
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/branchup.jpg")));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        start = System.nanoTime();
+        BranchInBound test = new BranchInBound();
+        test.test();
+        
+        //approach.DynamicSolution (wordLenth, sizeL, LineSize);
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+        double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
+        jLabel15.setText(String.valueOf(elapsedTimeInSecond));
+        jLabel15.revalidate();
+        jLabel15.repaint();
+        System.out.println(timeElapsed);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1099,11 +1138,25 @@ catch(InterruptedException ex)
                 jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
                 jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
                 break;
+            case 6:
+                jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+                jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+                break;
             default:
         }
         buttonCounter = 3;
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/greedyup.jpg")));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        start = System.nanoTime();
+        //BruteForce approach2 = new BruteForce();
+        //approach2.BruteSolution (wordLenth, sizeL, LineSize);
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+        double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
+        jLabel15.setText(String.valueOf(elapsedTimeInSecond));
+        jLabel15.revalidate();
+        jLabel15.repaint();
+        System.out.println(timeElapsed);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1157,15 +1210,18 @@ catch(InterruptedException ex)
                 jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
                 jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
                 break;
+            case 6:
+                jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+                jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+                break;
             default:
         }
         buttonCounter = 4;
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicup.jpg")));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
-        start = System.nanoTime(); 
+        start = System.nanoTime();
         Dynamic approach = new Dynamic();
-        System.out.println(LineSize);
-        approach.DynamicSolution (wordLenth, sizeL, LineSize);
+        approach.DynamicSolution (advancedalgorithms.Dynamic.wordLenth, advancedalgorithms.Dynamic.sizeL, advancedalgorithms.Dynamic.LineSize);
         finish = System.nanoTime();
         timeElapsed = finish - start;
         double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
@@ -1204,36 +1260,6 @@ catch(InterruptedException ex)
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicup.jpg")));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        switch(buttonCounter){
-            case 1:
-                jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
-                jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
-                break;
-            case 2:
-                jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/branchsleep.jpg")));
-                jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
-                break;
-            case 3:
-                jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/greedysleep.jpg")));
-                jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
-                break;
-            case 4:
-                jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicsleep.jpg")));
-                jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
-                break;
-            case 5:
-                jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
-                jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
-                break;
-            default:
-        }
-        buttonCounter = 5;
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
-        
-    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         switch(buttonCounter){
@@ -1328,6 +1354,160 @@ catch(InterruptedException ex)
         System.exit(0);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseEntered
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/devideup.jpg")));
+        if (buttonCounter==5){
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+            }
+        else{
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep2.jpg")));
+        }
+    }//GEN-LAST:event_jButton17MouseEntered
+
+    private void jButton17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseExited
+        if (buttonCounter==6){
+            jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/divideup.jpg")));
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        }
+        else{
+            jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+        }
+    }//GEN-LAST:event_jButton17MouseExited
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseEntered
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/divideup.jpg")));
+        if (buttonCounter==6){
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+            }
+        else{
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep2.jpg")));
+        }
+    }//GEN-LAST:event_jButton18MouseEntered
+
+    private void jButton18MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseExited
+        if (buttonCounter==6){
+            jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/divideup.jpg")));
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        }
+        else{
+            jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+        }
+    }//GEN-LAST:event_jButton18MouseExited
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        switch(buttonCounter){
+            case 1:
+            jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
+            jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 2:
+            jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/branchsleep.jpg")));
+            jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 3:
+            jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/greedysleep.jpg")));
+            jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 4:
+            jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicsleep.jpg")));
+            jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 5:
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
+            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 6:
+            jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            default:
+        }
+        buttonCounter = 6;
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/divideup.jpg")));
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        start = System.nanoTime();
+        //SpaceOptimized approach = new SpaceOptimized();
+        //approach.SpaceOptimizedSolution(wordLenth, sizeL, LineSize);
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+        double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
+        jLabel15.setText(String.valueOf(elapsedTimeInSecond));
+        jLabel15.revalidate();
+        jLabel15.repaint();
+        System.out.println(timeElapsed);
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        switch(buttonCounter){
+            case 1:
+            jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/brutesleep.jpg")));
+            jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 2:
+            jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/branchsleep.jpg")));
+            jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 3:
+            jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/greedysleep.jpg")));
+            jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 4:
+            jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dynamicsleep.jpg")));
+            jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 5:
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
+            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            case 6:
+            jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/dividesleep.jpg")));
+            jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+            break;
+            default:
+        }
+        buttonCounter = 5;
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        start = System.nanoTime();
+        SpaceOptimized approach = new SpaceOptimized();
+        approach.SpaceOptimizedSolution(advancedalgorithms.SpaceOptimized.wordLenth, advancedalgorithms.SpaceOptimized.sizeL, advancedalgorithms.SpaceOptimized.LineSize);
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+        double elapsedTimeInSecond = (double) timeElapsed / 1_000_000_000;
+        jLabel15.setText(String.valueOf(elapsedTimeInSecond));
+        jLabel15.revalidate();
+        jLabel15.repaint();
+        System.out.println(timeElapsed);
+
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseExited
+        if (buttonCounter==5){
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
+            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        }
+        else{
+            jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spacesleep.jpg")));
+            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep.jpg")));
+        }
+    }//GEN-LAST:event_jButton13MouseExited
+
+    private void jButton13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseEntered
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/spaceup.jpg")));
+        if (buttonCounter==5){
+            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
+        }
+        else{
+            jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiussleep2.jpg")));
+        }
+    }//GEN-LAST:event_jButton13MouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -1379,6 +1559,8 @@ catch(InterruptedException ex)
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
