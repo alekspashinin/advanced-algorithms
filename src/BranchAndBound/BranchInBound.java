@@ -23,7 +23,7 @@ public class BranchInBound {
         
          int line=0; //current state of line size
          int word=0;
-         int m=12; //size of the line with
+         int m=advancedalgorithms.MainJFrame.jSlider1.getValue(); //size of the line with
          int current_cost=0;
          int minCost=m;//total cost\
          int[] cost_array=new int[100];
@@ -86,12 +86,23 @@ public class BranchInBound {
         
          System.out.println(line_word_array);
          System.out.println(solution);
+         advancedalgorithms.TextEditor.editor.setText(solution);
          System.out.println(totalCost);
          
     }
     
+    public void start()
+    {
+    
+        String temp = advancedalgorithms.TextEditor.editor.getText();
+        
+        
+        ArrayList<String> str=new ArrayList<String>();
+    
+    }
     public static void test()
     {
+        String temp = advancedalgorithms.TextEditor.editor.getText();
         ArrayList<String> str=new ArrayList<String>();
             str.add("judi");
             str.add("messi");
@@ -115,7 +126,5 @@ public class BranchInBound {
     public static void main(String[] args) {
     test();
     }
-    
-    
     
 }

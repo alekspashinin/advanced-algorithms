@@ -1,3 +1,13 @@
+/**
+ *
+ *                    Jean Monnet University
+ * 
+ *         Rediet Gebretsion Tadesse * Dhayananth Dharmalingam
+ *         Poulomy Nandy * Aninda Maulik * Aleksei Pashinin
+ *
+ *                   Advanced Algorithms Project
+ *
+ */
 package advancedalgorithms;
 
 import java.awt.*;
