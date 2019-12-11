@@ -82,8 +82,8 @@ public class Divide_and_conquer {
             //resizing the words by considering line space limit
             if(devided.get(i).length()>m)
             {
-            //have to add the last from string from devided[i] to devided[i+1];
-           // devided[i+1]=addString(devided[i+1],lastWord,0); //we adding to next line if it is not fitting
+             //have to add the last from string from devided[i] to devided[i+1];
+             // devided[i+1]=addString(devided[i+1],lastWord,0); //we adding to next line if it is not fitting
                 
              //this means there is no next element
              if((devided.size()-1)==i)
@@ -105,12 +105,11 @@ public class Divide_and_conquer {
              devided.remove(i);
              devided.add(i,newString);
              
-           
              spilitedArray= devided.get(i).split("\\s+");//each line string wil be inserted to array
              countOfWordsOfEachLine= spilitedArray.length;//this is actually last word count of the line
              lastWord=spilitedArray[countOfWordsOfEachLine-1]; //got the last word
             }
-            
+
             if(actualWord.length()!=lastWord.length())
             {
                 //come here to check **********************
@@ -126,14 +125,11 @@ public class Divide_and_conquer {
            
 //            countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1); //storing word count to maintain its state
             i++;
-            
             if(i==devided.size()-1)
             {
-                
             looprun=false;
             }
             System.out.println(devided.get(i));
-            
          }
 
          
