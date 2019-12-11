@@ -64,9 +64,14 @@ public class Divide_and_conquer {
          int countOfWordsOfEachLine;
          String lastWord;
          String actualWord="";
-
-         //Logic
-         for (int i = 0; i < loopCount; i++) {
+         
+        
+         //i have to check loop count. because when u add a new string to new line, that wont run here*****
+//         for (int i = 0; i < loopCount; i++) 
+        int i=0;
+        boolean looprun=true;
+        while(looprun)
+         {
             spilitedArray= devided.get(i).split("\\s+");//each line string wil be inserted to array
             countOfWordsOfEachLine= spilitedArray.length;
             countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1);
@@ -79,10 +84,25 @@ public class Divide_and_conquer {
             {
             //have to add the last from string from devided[i] to devided[i+1];
            // devided[i+1]=addString(devided[i+1],lastWord,0); //we adding to next line if it is not fitting
-             devided.add(i+1,addString(devided.get(i+1),lastWord,0));
-            //have to remove the last from string from devided[i[;
-             String original = devided.get(i+1);
+                
+             //this means there is no next element
+             if((devided.size()-1)==i)
+             {
+                 devided.add(i+1,lastWord);
+               
+             }
+             else{
+              //we adding half last word of current loop to next line in first position. so it will join with rest of the word
+             String newStringN=addString(devided.get(i+1),lastWord,0);
+             devided.remove(i+1);
+             devided.add(i+1,newStringN);
+             
+             }
+            
+//          //have to remove the last half word from string from devided[i[;
+             String original = devided.get(i);
              String newString = original.replace(" "+lastWord,"");
+             devided.remove(i);
              devided.add(i,newString);
              
            
@@ -94,23 +114,34 @@ public class Divide_and_conquer {
             if(actualWord.length()!=lastWord.length())
             {
                 //come here to check **********************
-              devided.add(i+1,addString(devided.get(i+1),lastWord,0));
+              String fullword=addString(devided.get(i+1),lastWord,0);
+              devided.remove(i+1);
+              devided.add(i+1,fullword);
               //have to remove the moved string from devided[i[;
               String original = devided.get(i);
               String newString = original.replace(" "+lastWord,"");
+              devided.remove(i);
               devided.add(i,newString);
             }
            
 //            countOfWordCurrent=countOfWordCurrent+(countOfWordsOfEachLine-1); //storing word count to maintain its state
+            i++;
+            
+            if(i==devided.size()-1)
+            {
+                
+            looprun=false;
+            }
+            System.out.println(devided.get(i));
             
          }
 
          
 
 //************************
-         System.out.println(totalLineCost );
-         
-         return lineCostArray;
+//         System.out.println(totalLineCost );
+//         
+//         return lineCostArray;
          
          } catch (Exception e) {
                 System.out.print(e.getMessage());
