@@ -12,19 +12,39 @@ import java.util.ArrayList;
  * @author user
  */
 public class Greedy {
+    static String[] line;
+    
+    static ArrayList<String> wordsss= new ArrayList<>();
+    final static int MAX = Integer.MAX_VALUE;
+    final static int LineSize = advancedalgorithms.MainJFrame.jSlider1.getValue(); //Line Width
+    static int sizeL;
+    static int[] wordLenth;
     
     public  ArrayList<String> words= new ArrayList<>();
     public static String solGlo= new String();
     private int count=0;
-    public Greedy(ArrayList<String> words) {
-        this.words  =words;
-        count=this.words.size();
+    public Greedy() {
+       
     }
         
+    public void start()
+    {
+     
+        String temp = advancedalgorithms.TextEditor.editor.getText();
+
+        
+        line = temp.split(" ");
+                    int index = 1;
+                        for (String s : line) {
+                                wordsss.add(s);
+                        }
+        count=wordsss.size();
+        greedy(wordsss);
+    }
     
-     public int[] greedy()
+     public void greedy(ArrayList<String> words)
      {
-         System.out.println("greedy reached");
+         
          int l=0; //current state of line size
          int m=20; //size of the line with
          int lc=0;
@@ -54,7 +74,7 @@ public class Greedy {
              {
                  lineCostArray[lcac]=lc*lc*lc;
                  totalLineCost=totalLineCost+lineCostArray[lcac];
-                 solution=solution+"/n";
+                 solution=solution+"\n";
                  lc=0;
                  tempLenth=0;
                  lcac++;
@@ -64,7 +84,17 @@ public class Greedy {
          System.out.println(solution );
          System.out.println(totalLineCost );
          
-         return lineCostArray;
-     }
+//         return lineCostArray;
+     
     
+       advancedalgorithms.TextEditor.editor.setText(solution);
+        
+          SpaceComplexity(totalLineCost);
+    }
+    
+    public void SpaceComplexity(int totalCost)
+    {
+     System.out.println("Space Complexity " +totalCost); //total Cost
+       
+    }
 }

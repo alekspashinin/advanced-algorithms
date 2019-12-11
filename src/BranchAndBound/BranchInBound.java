@@ -13,12 +13,19 @@ import java.util.ArrayList;
  */
 public class BranchInBound {
     
+    static String[] line;
     
+     static ArrayList<String> words= new ArrayList<>();
+    final static int MAX = Integer.MAX_VALUE;
+    final static int LineSize = advancedalgorithms.MainJFrame.jSlider1.getValue(); //Line Width
+    static int sizeL;
+    static int[] wordLenth;
     public BranchInBound()
     {
     }
     
-    public static void  process(ArrayList<String> wordList)
+    
+    public  void  process(ArrayList<String> wordList)
     {
         
          int line=0; //current state of line size
@@ -45,12 +52,12 @@ public class BranchInBound {
              if (current_cost<=0)
              {
                  cost_array[line]=minCost;
-                 totalCost+=minCost;
+                 
                  line++;
                  word=0;
                  current_cost=0;
                  minCost=10;
-                 solution = solution + "/n" ;
+                 solution = solution + "\n" ;
                  
                  //first wod insering in new line
                  line_word_array[line][word]=wordList.get(i);
@@ -80,24 +87,40 @@ public class BranchInBound {
                      minCost=current_cost;
                  }
              }
-             countOfLoop++;        
+             countOfLoop++;  
+             
+             totalCost+= (minCost*minCost*minCost);
+             
          };
          
         
          System.out.println(line_word_array);
-         System.out.println(solution);
-         advancedalgorithms.TextEditor.editor.setText(solution);
-         System.out.println(totalCost);
          
+         System.out.println(solution);
+         
+         advancedalgorithms.TextEditor.editor.setText(solution);
+        
+          SpaceComplexity(totalCost);
+    }
+    
+    public void SpaceComplexity(int totalCost)
+    {
+     System.out.println("Space Complexity " +totalCost); //total Cost
+       
     }
     
     public void start()
     {
     
+//        String lineOfCurrencies = "USD JPY AUD SGD HKD CAD CHF GBP EURO INR"; String[] currencies = lineOfCurrencies.split(" ");
+
         String temp = advancedalgorithms.TextEditor.editor.getText();
-        
-        
-        ArrayList<String> str=new ArrayList<String>();
+        line = temp.split(" ");
+                    int index = 1;
+                        for (String s : line) {
+                                words.add(s);
+                        }
+        process(words);
     
     }
     public static void test()
@@ -120,11 +143,9 @@ public class BranchInBound {
 //            str.add("maniam");
 //            str.add("connet");
 
-    process(str);
+//    process(str);
     }
     
-    public static void main(String[] args) {
-    test();
-    }
+   
     
 }

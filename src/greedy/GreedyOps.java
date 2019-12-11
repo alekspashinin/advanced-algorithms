@@ -20,9 +20,9 @@ public class GreedyOps {
     
     public void callGreedy()
     {
-        System.out.println("call greedy");
-        Greedy greedy=new Greedy(wordList);
-       int[] result= greedy.greedy();
+//        System.out.println("call greedy");
+//        Greedy greedy=new Greedy(wordList);
+//       int[] result= greedy.greedy();
     }
     
         
