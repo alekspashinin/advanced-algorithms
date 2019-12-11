@@ -41,7 +41,8 @@ public class Divide_and_conquer {
          int remindr=stringLen%m;
          if(remindr>0)
          {
-          loopCount++;
+        
+             loopCount++;
          }
           ArrayList<String> devided = new ArrayList<String>();;
           int startingPos=0;
