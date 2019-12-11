@@ -24,7 +24,7 @@ public class FileScanner {
     
     public FileScanner() throws FileNotFoundException{
     //f = new File("text.txt");
-    in = new Scanner(new FileReader("words.txt"));
+    in = new Scanner(new FileReader("src/advancedalgorithms/words.txt"));
     words = in.nextLine().split(" ");
     
     int j, i=0;

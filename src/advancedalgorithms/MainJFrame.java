@@ -1355,7 +1355,7 @@ catch(InterruptedException ex)
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseEntered
-        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/devideup.jpg")));
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/divideup.jpg")));
         if (buttonCounter==5){
             jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/advancedalgorithms/Images/radiusup.jpg")));
             }
